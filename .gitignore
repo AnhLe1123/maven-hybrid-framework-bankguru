@@ -1,0 +1,6 @@
+/allure-results/
+/.idea/
+/browserLogs/
+/monitorLogs/
+/regressionLogs/
+/target/
