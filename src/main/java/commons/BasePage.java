@@ -63,7 +63,7 @@ public class BasePage {
         return explicitWait.until(ExpectedConditions.alertIsPresent());
     }
 
-    protected void acceptAlert(WebDriver driver) {
+    public void acceptAlert(WebDriver driver) {
         alert = waitAlertPresence(driver);
         alert.accept();
         sleepInSecond(2);
@@ -79,7 +79,7 @@ public class BasePage {
         alert.sendKeys(value);
     }
 
-    protected String getTextAlert(WebDriver driver) {
+    public String getTextAlert(WebDriver driver) {
         alert = waitAlertPresence(driver);
         return alert.getText();
     }
@@ -407,6 +407,10 @@ public class BasePage {
         return getElement(driver, locator).isEnabled();
     }
 
+    protected boolean isElementEnabled(WebDriver driver, String locator, String... params) {
+        return getElement(driver, getDynamicLocator(locator, params)).isEnabled();
+    }
+
     protected WebDriver switchToIframeByElement(WebDriver driver, String locator) {
         return driver.switchTo().frame(getElement(driver, locator));
     }
@@ -614,12 +618,49 @@ public class BasePage {
 
     public void inputToTextboxByName(WebDriver driver, String textboxName, String value) {
         waitForElementVisible(driver, BasePageUI.TEXTBOX_BY_NAME, textboxName);
+        clickToElement(driver, BasePageUI.TEXTBOX_BY_NAME, textboxName);
         sendkeyToElement(driver,BasePageUI.TEXTBOX_BY_NAME, value, textboxName);
+    }
+
+    public void inputToTextAreaByName(WebDriver driver, String textAreaName, String value) {
+        waitForElementVisible(driver, BasePageUI.TEXTAREA_BY_NAME, textAreaName);
+        clickToElement(driver, BasePageUI.TEXTAREA_BY_NAME, textAreaName);
+        sendkeyToElement(driver,BasePageUI.TEXTAREA_BY_NAME, value, textAreaName);
     }
 
     public void clickToButtonByName(WebDriver driver, String btnValue) {
         waitForElementClickable(driver, BasePageUI.BUTTON_BY_VALUE, btnValue);
         clickToElement(driver, BasePageUI.BUTTON_BY_VALUE, btnValue);
+    }
+
+    public void openSidebarMenuByPageName(WebDriver driver, String pageName) {
+        waitForElementClickable(driver,BasePageUI.SIDEBAR_MENU_BY_PAGE_NAME, pageName);
+        clickToElement(driver,BasePageUI.SIDEBAR_MENU_BY_PAGE_NAME, pageName);
+    }
+
+    public boolean isPageTitleByTextDisplayed(WebDriver driver, String pageTitle) {
+        waitForElementVisible(driver, BasePageUI.PAGE_TITLE_BY_TEXT, pageTitle);
+        return isElementDisplayed(driver, BasePageUI.PAGE_TITLE_BY_TEXT, pageTitle);
+    }
+
+    public void checkToRadioButtonByValue(WebDriver driver, String btnValue) {
+        waitForElementClickable(driver,BasePageUI.RADIO_BUTTON_BY_VALUE, btnValue);
+        checkToCheckboxOrRadio(driver,BasePageUI.RADIO_BUTTON_BY_VALUE, btnValue);
+    }
+
+    public String getTextValueByLabelAtTable(WebDriver driver, String label) {
+        waitForElementVisible(driver,BasePageUI.TABLE_VALUE_BY_LABEL, label);
+        return getElementText(driver,BasePageUI.TABLE_VALUE_BY_LABEL, label);
+    }
+
+    public boolean isTextboxByNameEnabled(WebDriver driver, String textboxName) {
+        waitForElementVisible(driver, BasePageUI.TEXTBOX_BY_NAME, textboxName);
+        return isElementEnabled(driver, BasePageUI.TEXTBOX_BY_NAME, textboxName);
+    }
+
+    public void selectOptionInDropdownByName(WebDriver driver, String dropdownName, String textValue) {
+        waitForElementVisible(driver, BasePageUI.DROPDOWN_BY_NAME, dropdownName);
+        selectItemInDropdownByText(driver, BasePageUI.DROPDOWN_BY_NAME, textValue, dropdownName);
     }
 
     private Alert alert;

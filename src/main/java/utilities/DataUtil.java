@@ -21,11 +21,18 @@ public class DataUtil {
     }
 
     public String getFullName() {
-        return faker.name().fullName();
+        return getFirstName() + " " + getLastName();
     }
 
     public String getEmailAddress() {
-        return faker.internet().emailAddress();
+        String randEmail = faker.internet().emailAddress();
+        String emailAddress = "";
+        if (randEmail.length() > 30) {
+            emailAddress = randEmail.substring(randEmail.length() - 30);
+        } else {
+            emailAddress = randEmail;
+        }
+        return emailAddress;
     }
 
     public String getPassword() {

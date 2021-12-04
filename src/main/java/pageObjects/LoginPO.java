@@ -26,9 +26,4 @@ public class LoginPO extends BasePage {
         waitForElementVisible(driver, LoginPageUI.ACCESS_DETAILS_TITLE);
         return isElementDisplayed(driver, LoginPageUI.ACCESS_DETAILS_TITLE);
     }
-
-    public String getTextValueByLabelAtTable(String label) {
-        waitForElementVisible(driver,LoginPageUI.TABLE_VALUE_BY_LABEL, label);
-        return getElementText(driver,LoginPageUI.TABLE_VALUE_BY_LABEL, label);
-    }
 }
