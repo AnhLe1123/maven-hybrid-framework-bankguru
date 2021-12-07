@@ -1,22 +1,19 @@
 package com.bankguru.payment;
 
 import commons.BaseTest;
-import envConfig.Environment;
+import factoryEnvironment.EnvConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.*;
 import utilities.DataUtil;
 
 public class Payment_01_Create_Edit_Delete_Customer extends BaseTest {
-    @Parameters({ "browser", "env" })
+    @Parameters({"envName", "serverName", "browser", "ipAddress", "port", "osName", "osVersion"})
     @BeforeClass
-    public void initBrowser(String browserName, String envName) {
-        ConfigFactory.setProperty("env", envName);
-        environment = ConfigFactory.create(Environment.class);
+    public void initBrowser(@Optional("local") String envName, @Optional("dev") String serverName, @Optional("chrome") String browserName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Mac OS X") String osName, @Optional("10.16") String osVersion) {
+        ConfigFactory.setProperty("env", serverName);
+        envConfig = ConfigFactory.create(EnvConfig.class);
         fakeData = DataUtil.getData();
 
         emailAddress = fakeData.getEmailAddress();
@@ -38,8 +35,8 @@ public class Payment_01_Create_Edit_Delete_Customer extends BaseTest {
         editMobile = fakeData.getPhoneNumber();
         editEmail = fakeData.getEmailAddress();
 
-        log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + environment.appUrl() + "'");
-        driver = getBrowserDriver(browserName, environment.appUrl());
+        log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + envConfig.appUrl() + "'");
+        driver = getBrowserDriver(envName, envConfig.appUrl(), browserName, ipAddress, portNumber, osName, osVersion);
 
         log.info("Pre-condition - Step 02: Verify Login page displayed");
         loginPage = PageGeneratorManager.getLoginPage(driver);
@@ -60,7 +57,7 @@ public class Payment_01_Create_Edit_Delete_Customer extends BaseTest {
         password = loginPage.getTextValueByLabelAtTable(driver, "Password");
 
         log.info("Pre-condition - Step 07: Open Login page");
-        loginPage.openUrl(driver, environment.appUrl());
+        loginPage.openUrl(driver, envConfig.appUrl());
 
         log.info("Pre-condition - Step 08: Input to UserID textbox at Login page with value: " + userID);
         loginPage.inputToTextboxByName(driver, "uid", userID);
@@ -91,7 +88,7 @@ public class Payment_01_Create_Edit_Delete_Customer extends BaseTest {
         newCustomerPage.inputToCustomerTextboxByName("name", cusName);
 
         log.info("Create_Cus_01 - Step 04: Click to Gender radio button with value: " + gender);
-        newCustomerPage.checkToRadioButtonByValue(driver, gender.substring(0,1));
+        newCustomerPage.checkToRadioButtonByValue(driver, gender.substring(0, 1));
 
         log.info("Create_Cus_01 - Step 05: Input to Date of Birth textbox");
         newCustomerPage.inputBirthDateTextbox(birthDate, birthMonth, birthYear);
@@ -232,14 +229,16 @@ public class Payment_01_Create_Edit_Delete_Customer extends BaseTest {
         editCustomerPage.acceptAlert(driver);
     }
 
+    @Parameters("envName")
     @AfterClass(alwaysRun = true)
-    public void cleanBrowser() {
-        closeBrowserAndDriver();
+    public void cleanBrowser(@Optional("local") String envName) {
+        log.info("Post-condition - Close browser and driver");
+        closeBrowserAndDriver(envName);
     }
 
     WebDriver driver;
     DataUtil fakeData;
-    Environment environment;
+    EnvConfig envConfig;
     LoginPO loginPage;
     ManagerHomePO managerHomePage;
     NewCustomerPO newCustomerPage;

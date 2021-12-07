@@ -46,6 +46,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>${webdriver.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
@@ -160,7 +166,7 @@
                 <configuration>
                     <!-- Run TestNG xml file -->
                     <suiteXmlFiles>
-                        <file>src/test/resources/runBankguruTestcases.xml</file>
+                        <file>src/test/resources/runBankguruGrid.xml</file>
                     </suiteXmlFiles>
 
                     <!-- Argument -->

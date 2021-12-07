@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Payment - Bankguru" parallel="false">
+    <parameter name="envName" value="saucelab" />
+
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="reportConfig.MethodListener"/>
+        <listener class-name="reportConfig.ReportNGListener"/>
+    </listeners>
+
+    <test name="Run on FIREFOX">
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="osName" value="macOS 11.00" />
+        <classes>
+            <class name="com.bankguru.payment.Payment_01_Create_Edit_Delete_Customer"/>
+            <class name="com.bankguru.payment.Payment_02_Deposit_Transfer_Withdraw"/>
+        </classes>
+    </test>
+
+    <test name="Run on CHROME">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="osName" value="Windows 10" />
+        <classes>
+            <class name="com.bankguru.payment.Payment_01_Create_Edit_Delete_Customer"/>
+            <class name="com.bankguru.payment.Payment_02_Deposit_Transfer_Withdraw"/>
+        </classes>
+    </test>
+</suite>

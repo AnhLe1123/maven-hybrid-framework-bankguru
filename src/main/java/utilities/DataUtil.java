@@ -13,11 +13,11 @@ public class DataUtil {
     }
 
     public String getFirstName() {
-        return faker.name().firstName();
+        return faker.name().firstName().replaceAll("[^A-Za-z0-9]","");
     }
 
     public String getLastName() {
-        return faker.name().lastName();
+        return faker.name().lastName().replaceAll("[^A-Za-z0-9]","");
     }
 
     public String getFullName() {
@@ -26,7 +26,7 @@ public class DataUtil {
 
     public String getEmailAddress() {
         String randEmail = faker.internet().emailAddress();
-        String emailAddress = "";
+        String emailAddress;
         if (randEmail.length() > 30) {
             emailAddress = randEmail.substring(randEmail.length() - 30);
         } else {
