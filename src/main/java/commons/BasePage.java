@@ -449,6 +449,11 @@ public class BasePage {
         action.sendKeys(getElement(driver, locator), key).perform();
     }
 
+    protected void pressKeyToElement(WebDriver driver, String locator, Keys key, String... params) {
+        action = new Actions(driver);
+        action.sendKeys(getElement(driver, getDynamicLocator(locator, params)), key).perform();
+    }
+
     protected Object executeForBrowser(WebDriver driver, String javaScript) {
         jsExecutor = (JavascriptExecutor) driver;
         return jsExecutor.executeScript(javaScript);
@@ -661,6 +666,21 @@ public class BasePage {
     public void selectOptionInDropdownByName(WebDriver driver, String dropdownName, String textValue) {
         waitForElementVisible(driver, BasePageUI.DROPDOWN_BY_NAME, dropdownName);
         selectItemInDropdownByText(driver, BasePageUI.DROPDOWN_BY_NAME, textValue, dropdownName);
+    }
+
+    public void pressTabKeyInTextboxByName(WebDriver driver, String textboxName) {
+        waitForElementVisible(driver, BasePageUI.TEXTBOX_BY_NAME, textboxName);
+        pressKeyToElement(driver, BasePageUI.TEXTBOX_BY_NAME, Keys.TAB, textboxName);
+    }
+
+    public void pressTabKeyInTextAreaByName(WebDriver driver, String textAreaName) {
+        waitForElementVisible(driver, BasePageUI.TEXTAREA_BY_NAME, textAreaName);
+        pressKeyToElement(driver, BasePageUI.TEXTAREA_BY_NAME, Keys.TAB, textAreaName);
+    }
+
+    public String getErrorMessageByFieldName(WebDriver driver, String fieldName) {
+        waitForElementVisible(driver, BasePageUI.ERROR_MESSAGE_BY_FIELD_NAME, fieldName);
+        return getElementText(driver, BasePageUI.ERROR_MESSAGE_BY_FIELD_NAME, fieldName);
     }
 
     private Alert alert;

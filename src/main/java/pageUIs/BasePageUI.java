@@ -9,4 +9,5 @@ public class BasePageUI {
     public static final String RADIO_BUTTON_BY_VALUE = "//input[@type='radio' and @value='%s']";
     public static final String TABLE_VALUE_BY_LABEL = "//tr//td[contains(text(),'%s')]/following-sibling::td";
     public static final String DROPDOWN_BY_NAME = "//select[@name='%s']";
+    public static final String ERROR_MESSAGE_BY_FIELD_NAME = "//td[text()='%s']/following-sibling::td//label";
 }

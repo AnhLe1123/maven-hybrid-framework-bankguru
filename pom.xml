@@ -166,7 +166,7 @@
                 <configuration>
                     <!-- Run TestNG xml file -->
                     <suiteXmlFiles>
-                        <file>src/test/resources/runBankguruGrid.xml</file>
+                        <file>src/test/resources/runBankguruLocal.xml</file>
                     </suiteXmlFiles>
 
                     <!-- Argument -->

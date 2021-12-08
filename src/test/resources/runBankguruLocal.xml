@@ -12,8 +12,10 @@
     <test name="Run on FIREFOX">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="com.bankguru.payment.Payment_01_Create_Edit_Delete_Customer"/>
-            <class name="com.bankguru.payment.Payment_02_Deposit_Transfer_Withdraw"/>
+            <class name="com.bankguru.customer.New_Cus_01_Name_Email_Validation"/>
+            <class name="com.bankguru.customer.New_Cus_02_Address_City_State_Validation"/>
+            <class name="com.bankguru.customer.New_Cus_03_Pin_Telephone_Validation"/>
+            <class name="com.bankguru.customer.New_Cus_04_Create_New_Customer"/>
         </classes>
     </test>
 </suite>
