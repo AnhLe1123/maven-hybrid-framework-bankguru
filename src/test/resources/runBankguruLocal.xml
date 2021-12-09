@@ -16,6 +16,9 @@
             <class name="com.bankguru.customer.New_Cus_02_Address_City_State_Validation"/>
             <class name="com.bankguru.customer.New_Cus_03_Pin_Telephone_Validation"/>
             <class name="com.bankguru.customer.New_Cus_04_Create_New_Customer"/>
+            <class name="com.bankguru.customer.Edit_Cus_01_Customer_ID_Validation"/>
+            <class name="com.bankguru.customer.Edit_Cus_02_Address_City_State_Validation"/>
+            <class name="com.bankguru.customer.Edit_Cus_03_Pin_Telephone_Email_Validation"/>
         </classes>
     </test>
 </suite>
